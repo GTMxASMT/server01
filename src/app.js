@@ -22,46 +22,46 @@ app.use(cookieParser())
 
 // app.get('/api/v1/products', (req, res) => {
 //     res.json(products);})
-app.get("/api/v1/products", async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.json(products);
-    } catch (err) {
-        res.status(500).json({ message: "Error fetching products" });
-    }
-});
+// app.get("/api/v1/products", async (req, res) => {
+//     try {
+//         const products = await Product.find();
+//         res.json(products);
+//     } catch (err) {
+//         res.status(500).json({ message: "Error fetching products" });
+//     }
+// });
 
-app.get("/api/v1/products/:id", async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
-        if (!product) return res.status(404).json({ message: "Product not found" });
-        res.json(product);
-    } catch (err) {
-        res.status(500).json({ message: "Error fetching product" });
-    }
-});
+// app.get("/api/v1/products/:id", async (req, res) => {
+//     try {
+//         const product = await Product.findById(req.params.id);
+//         if (!product) return res.status(404).json({ message: "Product not found" });
+//         res.json(product);
+//     } catch (err) {
+//         res.status(500).json({ message: "Error fetching product" });
+//     }
+// });
 
-app.post("/api/v1/products", async (req, res) => {
-    try {
-        const data = req.body;
-        if (Array.isArray(data)) {
-            const products = await Product.insertMany(data);
-            return res.status(201).json({ message: "Multiple products added", products });
-        }
+// app.post("/api/v1/products", async (req, res) => {
+//     try {
+//         const data = req.body;
+//         if (Array.isArray(data)) {
+//             const products = await Product.insertMany(data);
+//             return res.status(201).json({ message: "Multiple products added", products });
+//         }
 
-        // If it's a single object → create one
-        const { title, price, description, image, category, rating } = data;
-        const product = new Product({ title, price, description, image, category, rating });
-        await product.save();
+//         const { title, price, description, image, category, rating } = data;
+//         const product = new Product({ title, price, description, image, category, rating });
+//         await product.save();
 
-        res.status(201).json({ message: "Product added", product });
-    } catch (err) {
-        console.error("Error adding product:", err.message);
-        res.status(500).json({ message: "Failed to add product" });
-    }
-});
+//         res.status(201).json({ message: "Product added", product });
+//     } catch (err) {
+//         console.error("Error adding product:", err.message);
+//         res.status(500).json({ message: "Failed to add product" });
+//     }
+// });
 
 import UserRouter from './routes/user.routes.js';
+import ProductsRouter from './routes/product.routes.js'
 app.get('/', (req, res) => {
     res.status(200)
         .send(
@@ -69,4 +69,5 @@ app.get('/', (req, res) => {
         );
 })
 app.use('/api/v1/user', UserRouter);
+app.use('/api/v1', ProductsRouter);
 export { app }
