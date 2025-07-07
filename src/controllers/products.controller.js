@@ -12,7 +12,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
     }
     res
         .status(200)
-        .json(new ApiResponse(products, "Products fetched successfully"));
+        .json(new ApiResponse(200, products, "Products fetched successfully"));
 });
 
 const getProductById = asyncHandler(async (req, res) => {
@@ -28,7 +28,7 @@ const getProductById = asyncHandler(async (req, res) => {
     }
     res
         .status(200)
-        .json(new ApiResponse(product, "Product fetched successfully"));
+        .json(new ApiResponse(200, product, "Product fetched successfully"));
 });
 
 const addProduct = asyncHandler(async (req, res) => {
@@ -54,7 +54,7 @@ const addProduct = asyncHandler(async (req, res) => {
     }
 
     const { title, price, description, category, rating } = req.body
-
+    
     if (!title || !price) {
         throw new ApiError(400, "Product title and price are required!")
     }
