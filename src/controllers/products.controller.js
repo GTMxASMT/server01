@@ -16,12 +16,15 @@ const getAllProducts = asyncHandler(async (req, res) => {
 });
 
 const getProductById = asyncHandler(async (req, res) => {
-    const { productId } = req.params ;
+    console.log(" get proudct by id");
+    console.log('req.params - ' , req.params);
+    const {id} = req.params ;
+    
 
-    if (!productId) {
+    if (!id) {
         throw new ApiError(400, "Product ID is required");
     }
-    const product = await Product.findById(productId);
+    const product = await Product.findById(id);
 
     if (!product) {
         throw new ApiError(404, "Product not found");
