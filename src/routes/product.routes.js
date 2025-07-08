@@ -3,7 +3,7 @@ import {
     getAllProducts,
     getProductById,
     addProduct,
-    addMultipleProducts,
+    addMultipleProducts, 
     addProductImage
 } from "../controllers/products.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
