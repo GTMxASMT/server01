@@ -13,7 +13,7 @@ const router = Router();
 
 
 router.route("/products").get(getAllProducts);
-router.route("/products/:productId").get(getProductById);
+router.route("/products/:id").get(getProductById);
 router.route("/products").post(verifyJWT, addProduct);
 router.route("/products/multiple").post(verifyJWT, addMultipleProducts);
 router.route("/products/image").post(verifyJWT, upload.single("image"), addProductImage);
